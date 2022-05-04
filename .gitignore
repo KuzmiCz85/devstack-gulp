@@ -1,3 +1,7 @@
 # Ignore all Git files except specified
 .git*
 !.gitignore
+
+# Ignore Gulp package files
+node_modules
+package-lock.json

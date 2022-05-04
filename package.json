@@ -1,0 +1,9 @@
+{
+  "name": "devstack-gulp",
+  "version": "1.0.0",
+  "description": "Gulp devstack",
+  "author": "KuzmiCz",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
