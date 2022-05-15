@@ -1,1 +1,1 @@
-// Add some JS scripts if needed
+// Contents of main js source file

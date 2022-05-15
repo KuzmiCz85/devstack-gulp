@@ -2,6 +2,11 @@
 
 // Configuration
 const settings = {
+  js: {
+    source: 'source/js/*.js',
+    target: 'test/js/',
+    filename: 'script.js'
+  },
   sass: {
     source: 'source/sass/style.scss',
     target: 'test/css/',
@@ -29,6 +34,16 @@ function sassCompile() {
 }
 
 exports.sassCompile = sassCompile;
+
+// JavaScript merge files
+function taskJsMerge() {
+  return gulp
+    .src(settings.js.source)
+    .pipe(concat(settings.js.filename))
+    .pipe(gulp.dest(settings.js.target));
+}
+
+exports.taskJsMerge = taskJsMerge;
 
 // Default task
 exports.default = sassCompile;
