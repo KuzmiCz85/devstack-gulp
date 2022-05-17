@@ -1,28 +1,40 @@
 'use strict';
 
-// Configuration
+/**
+ * Configuration
+ */
+
+// Target folder
+const dist = 'test/';
+
+// Settings
 const settings = {
   css: {
     source: 'source/sass/style.scss',
-    target: 'test/css/',
-    filename: 'style.css'
+    target: dist + 'css/',
+    filename: 'style.css',
+    watch: 'source/sass/**/*.scss'
   },
   js: {
-    source: 'source/js/*.js',
-    target: 'test/js/',
-    filename: 'script.js'
+    source: 'source/js/**/*.js',
+    target: dist + 'js/',
+    filename: 'script.js',
+    watch: 'source/js/**/*.js'
   },
   html: {
     source: 'source/pages/*.{html,htm,php}',
-    target: 'test/'
+    target: dist,
+    watch: 'source/pages/*.{html,htm,php}'
   },
   img: {
     source: 'source/images/**/*.{gif,jpg,jpeg,png}',
-    target: 'test/images/'
+    target: dist + 'images/'
   }
 }
 
-// Gulp plugins
+/**
+ * Gulp api & plugins
+ */
 
 // Gulp
 const gulp = require('gulp');
@@ -30,8 +42,14 @@ const gulp = require('gulp');
   const concat = require('gulp-concat');
 // Create css from sass files
 const sass = require('gulp-sass')(require('sass'));
+// Minify js files
+const uglify = require('gulp-uglify');
+// Optimize images
+const imagemin = require('gulp-imagemin');
 
-// Tasks
+/**
+ * Tasks
+ */
 
 // Css - compile from sass
 function taskCss() {
@@ -43,9 +61,9 @@ function taskCss() {
 
 // JavaScript - merge and minify files
 function taskJs() {
-  return gulp
-    .src(settings.js.source)
+  return gulp.src(settings.js.source)
     .pipe(concat(settings.js.filename))
+    .pipe(uglify())
     .pipe(gulp.dest(settings.js.target));
 }
 
@@ -59,9 +77,22 @@ function taskHtml() {
 // Images - copy and optimize
 function taskImg() {
   return gulp.src(settings.img.source)
-  // add imagemin
+  .pipe(imagemin())
   .pipe(gulp.dest(settings.img.target));
 }
 
-// Default task
-exports.default = gulp.parallel(taskCss, taskJs, taskHtml, taskImg);
+// Watch - track frequently changed files
+function taskWatch() {
+  gulp.watch(settings.css.watch, taskCss);
+  gulp.watch(settings.js.watch, taskJs);
+  gulp.watch(settings.html.watch, taskHtml);
+}
+
+/**
+ * Task runners
+ */
+
+// Images
+exports.taskImg = taskImg;
+// Default
+exports.default = taskWatch;
