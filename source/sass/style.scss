@@ -1,17 +1,18 @@
 // Settings
-  /* Variables */
-// Tools
-  /* Mixins */
-// Core
-  /* Reset */
-  /* Fonts */
-// Layout
-  /* Header
-    Nav
-    Footer */
-  // etc.
+@import "base/variables";
+
+// Mixins
+@import "base/mixins";
+
+// General
+  // Basic propeties
+  @import "base/base";
+  // Layout
+  @import "base/layout";
+  // Fonts
+  @import "base/fonts";
+
 // Components
-  /* Button
-    Image
-    Table */
-  // etc.
+  // Main components
+  @import "components/component";
+  // Partial components
