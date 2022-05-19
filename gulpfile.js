@@ -56,13 +56,18 @@ const uglify = require('gulp-uglify');
 // Optimize images
 const imagemin = require('gulp-imagemin');
 
+// Signal task completion
+const taskEnd = Promise.resolve('end');
+
 // Check if automatic cleaning is allowed
 function cleanCheck() {
   if (dist.autoClean == true) {
+    console.log('Cleaning enabled\n');
     return taskClean();
   } else {
     console.log('Cleaning disabled');
   }
+  return taskEnd;
 };
 
 /**
