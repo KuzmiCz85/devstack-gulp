@@ -8,9 +8,9 @@
 const dist = {
   target: 'test/',
   /* Auto clean target folder before upload
-    set autoclean value to true */
-  autoClean: false,
-}
+    set autoClean value to true */
+  autoClean: true,
+};
 
 // Settings
 const settings = {
@@ -35,14 +35,16 @@ const settings = {
     source: 'source/images/**/*.{gif,jpg,jpeg,png}',
     target: dist.target + 'images/'
   }
-}
+};
 
 /**
- * Gulp api & plugins
+ * Gulp API & plugins
  */
 
 // Gulp
 const gulp = require('gulp');
+  // API
+  const {src, dest, series, parallel, watch} = require('gulp');
   // Merge files
   const concat = require('gulp-concat');
   // Delete files
@@ -55,9 +57,9 @@ const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 
 // Check if automatic cleaning is allowed
-async function cleanCheck() {
+function cleanCheck() {
   if (dist.autoClean == true) {
-    taskClean();
+    return taskClean();
   } else {
     console.log('Cleaning disabled');
   }
@@ -69,51 +71,51 @@ async function cleanCheck() {
 
 // Css - compile from sass
 function taskCss() {
-  return gulp.src(settings.css.source)
+  return src(settings.css.source)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(concat(settings.css.filename))
-    .pipe(gulp.dest(settings.css.target));
-}
+    .pipe(dest(settings.css.target));
+};
 
 // JavaScript - merge and minify files
 function taskJs() {
-  return gulp.src(settings.js.source)
+  return src(settings.js.source)
     .pipe(concat(settings.js.filename))
     .pipe(uglify())
-    .pipe(gulp.dest(settings.js.target));
-}
+    .pipe(dest(settings.js.target));
+};
 
 // Html - copy and render pages
 function taskHtml() {
-  return gulp.src(settings.html.source)
+  return src(settings.html.source)
   // add nunjucks render
-  .pipe(gulp.dest(settings.html.target));
-}
+  .pipe(dest(settings.html.target));
+};
 
 // Images - copy and optimize
 function taskImg() {
-  return gulp.src(settings.img.source)
+  return src(settings.img.source)
   .pipe(imagemin())
-  .pipe(gulp.dest(settings.img.target));
-}
+  .pipe(dest(settings.img.target));
+};
 
 // Clean - delete files in dist folder
 async function taskClean() {
-  const deletedFilePaths = await del([dist + '**/*.*']);
-  const deletedDirectoryPaths = await del([dist + '**/']);
+  const deletedFilePaths = await del([dist.target + '**/*.*']);
+  const deletedDirectoryPaths = await del([dist.target + '**/']);
 
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
   console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'));
   console.log('\n');
-}
+};
 
 // Watch - track frequently changed files
 function taskWatch() {
-  gulp.watch(settings.css.watch, taskCss);
-  gulp.watch(settings.js.watch, taskJs);
-  gulp.watch(settings.html.watch, taskHtml);
-}
+  watch(settings.css.watch, taskCss);
+  watch(settings.js.watch, taskJs);
+  watch(settings.html.watch, taskHtml);
+};
 
 /**
  * Task runners
@@ -132,6 +134,6 @@ function taskWatch() {
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = gulp.series(cleanCheck, gulp.parallel(taskCss, taskJs, taskHtml, taskImg));
+  exports.deploy = series(cleanCheck, parallel(taskCss, taskJs, taskHtml, taskImg));
   // Default
   exports.default = taskWatch;
