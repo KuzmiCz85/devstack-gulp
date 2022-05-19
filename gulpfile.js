@@ -5,30 +5,35 @@
  */
 
 // Target folder
-const dist = 'test/';
+const dist = {
+  target: 'test/',
+  /* Auto clean target folder before upload
+    set autoclean value to true */
+  autoClean: false,
+}
 
 // Settings
 const settings = {
   css: {
     source: 'source/sass/style.scss',
-    target: dist + 'css/',
+    target: dist.target + 'css/',
     filename: 'style.css',
     watch: 'source/sass/**/*.scss'
   },
   js: {
     source: 'source/js/**/*.js',
-    target: dist + 'js/',
+    target: dist.target + 'js/',
     filename: 'script.js',
     watch: 'source/js/**/*.js'
   },
   html: {
     source: 'source/pages/*.{html,htm,php}',
-    target: dist,
+    target: dist.target + '',
     watch: 'source/pages/*.{html,htm,php}'
   },
   img: {
     source: 'source/images/**/*.{gif,jpg,jpeg,png}',
-    target: dist + 'images/'
+    target: dist.target + 'images/'
   }
 }
 
@@ -48,6 +53,15 @@ const sass = require('gulp-sass')(require('sass'));
 const uglify = require('gulp-uglify');
 // Optimize images
 const imagemin = require('gulp-imagemin');
+
+// Check if automatic cleaning is allowed
+async function cleanCheck() {
+  if (dist.autoClean == true) {
+    taskClean();
+  } else {
+    console.log('Cleaning disabled');
+  }
+};
 
 /**
  * Tasks
@@ -118,6 +132,6 @@ function taskWatch() {
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = gulp.series(taskClean, gulp.parallel(taskCss, taskJs, taskHtml, taskImg));
+  exports.deploy = gulp.series(cleanCheck, gulp.parallel(taskCss, taskJs, taskHtml, taskImg));
   // Default
   exports.default = taskWatch;
