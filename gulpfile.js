@@ -18,7 +18,8 @@ const settings = {
     source: 'source/sass/style.scss',
     target: dist.target + 'css/',
     filename: 'style.css',
-    watch: 'source/sass/**/*.scss'
+    watch: 'source/sass/**/*.scss',
+    components: ['source/sass/base/*.scss', 'source/sass/components/*.scss']
   },
   js: {
     source: 'source/js/**/*.js',
@@ -51,6 +52,8 @@ const gulp = require('gulp');
   const del = require('del');
 // Create css from sass files
 const sass = require('gulp-sass')(require('sass'));
+// Lint css files
+const stylelint = require('gulp-stylelint');
 // Minify js files
 const uglify = require('gulp-uglify');
 // Lint js files
@@ -82,6 +85,19 @@ function taskCss() {
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(concat(settings.css.filename))
     .pipe(dest(settings.css.target));
+};
+
+// Css - lint files
+function taskCssLint () {
+  return src(settings.css.components)
+  .pipe(stylelint({
+    reporters: [
+      {
+        formatter: 'string',
+        console: true
+      }
+    ]
+  }));
 };
 
 // JavaScript - merge and minify files
@@ -138,7 +154,10 @@ function taskWatch() {
 
 // Source files processing
   // Css
-  exports.css = taskCss;
+    // Process css files
+    exports.css = taskCss;
+    // Lint css
+    exports.cssLint = taskCssLint;
   // Js
     // Process js files
     exports.js = taskJs;
@@ -152,6 +171,6 @@ function taskWatch() {
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = series(cleanCheck, parallel(taskCss, series(taskJsLint, taskJs), taskHtml, taskImg));
+  exports.deploy = series(cleanCheck, parallel(series(taskCssLint, taskCss), series(taskJsLint, taskJs), taskHtml, taskImg));
   // Default
   exports.default = taskWatch;

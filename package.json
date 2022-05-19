@@ -10,8 +10,13 @@
     "gulp-imagemin": "^7.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-sass": "^5.1.0",
+    "gulp-stylelint": "^13.0.0",
     "gulp-uglify": "^3.0.2",
     "jshint": "^2.13.4",
-    "sass": "^1.51.0"
+    "postcss": "^8.4.14",
+    "postcss-scss": "^4.0.4",
+    "sass": "^1.51.0",
+    "stylelint": "^14.8.2",
+    "stylelint-config-standard": "^25.0.0"
   }
 }
