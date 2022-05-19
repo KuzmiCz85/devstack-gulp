@@ -53,6 +53,8 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 // Minify js files
 const uglify = require('gulp-uglify');
+// Lint js files
+const jshint = require('gulp-jshint');
 // Optimize images
 const imagemin = require('gulp-imagemin');
 
@@ -88,6 +90,14 @@ function taskJs() {
     .pipe(concat(settings.js.filename))
     .pipe(uglify())
     .pipe(dest(settings.js.target));
+};
+
+// Javascript - lint files
+function taskJsLint() {
+  return src(settings.js.source)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
 };
 
 // Html - copy and render pages
@@ -130,7 +140,10 @@ function taskWatch() {
   // Css
   exports.css = taskCss;
   // Js
-  exports.js = taskJs;
+    // Process js files
+    exports.js = taskJs;
+    // Lint js files
+    exports.jsLint = taskJsLint;
   // Html
   exports.html = taskHtml;
   // Images
@@ -139,6 +152,6 @@ function taskWatch() {
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = series(cleanCheck, parallel(taskCss, taskJs, taskHtml, taskImg));
+  exports.deploy = series(cleanCheck, parallel(taskCss, series(taskJsLint, taskJs), taskHtml, taskImg));
   // Default
   exports.default = taskWatch;
