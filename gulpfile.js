@@ -40,6 +40,8 @@ const settings = {
 const gulp = require('gulp');
   // Merge files
   const concat = require('gulp-concat');
+  // Delete files
+  const del = require('del');
 // Create css from sass files
 const sass = require('gulp-sass')(require('sass'));
 // Minify js files
@@ -54,7 +56,7 @@ const imagemin = require('gulp-imagemin');
 // Css - compile from sass
 function taskCss() {
   return gulp.src(settings.css.source)
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(concat(settings.css.filename))
     .pipe(gulp.dest(settings.css.target));
 }
@@ -81,6 +83,17 @@ function taskImg() {
   .pipe(gulp.dest(settings.img.target));
 }
 
+// Clean - delete files in dist folder
+async function taskClean() {
+  const deletedFilePaths = await del([dist + '**/*.*']);
+  const deletedDirectoryPaths = await del([dist + '**/']);
+
+  console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  console.log('\n');
+  console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'));
+  console.log('\n');
+}
+
 // Watch - track frequently changed files
 function taskWatch() {
   gulp.watch(settings.css.watch, taskCss);
@@ -92,7 +105,19 @@ function taskWatch() {
  * Task runners
  */
 
-// Images
-exports.taskImg = taskImg;
-// Default
-exports.default = taskWatch;
+// Source files processing
+  // Css
+  exports.css = taskCss;
+  // Js
+  exports.js = taskJs;
+  // Html
+  exports.html = taskHtml;
+  // Images
+  exports.img = taskImg;
+// General
+  // Clean distribution folder
+  exports.clean = taskClean;
+  // Distribute
+  exports.deploy = gulp.series(taskClean, gulp.parallel(taskCss, taskJs, taskHtml, taskImg));
+  // Default
+  exports.default = taskWatch;
