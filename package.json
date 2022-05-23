@@ -9,6 +9,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-jshint": "^2.1.0",
+    "gulp-nunjucks-render": "^2.2.3",
     "gulp-sass": "^5.1.0",
     "gulp-stylelint": "^13.0.0",
     "gulp-uglify": "^3.0.2",

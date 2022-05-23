@@ -30,7 +30,8 @@ const settings = {
   html: {
     source: 'source/pages/*.{html,htm,php}',
     target: dist.target + '',
-    watch: 'source/pages/*.{html,htm,php}'
+    watch: 'source/pages/*.{html,htm,php}',
+    components: 'source/pages/templates/'
   },
   img: {
     source: 'source/images/**/*.{gif,jpg,jpeg,png}',
@@ -58,6 +59,8 @@ const stylelint = require('gulp-stylelint');
 const uglify = require('gulp-uglify');
 // Lint js files
 const jshint = require('gulp-jshint');
+// Render html with nunjucks templates
+const nunjucksRender = require('gulp-nunjucks-render');
 // Optimize images
 const imagemin = require('gulp-imagemin');
 
@@ -119,8 +122,13 @@ function taskJsLint() {
 // Html - copy and render pages
 function taskHtml() {
   return src(settings.html.source)
-  // add nunjucks render
-  .pipe(dest(settings.html.target));
+    .pipe(nunjucksRender({
+      path: [settings.html.components],
+      envOptions: {
+        trimBlocks: true,
+      },
+    }))
+    .pipe(dest(settings.html.target));
 };
 
 // Images - copy and optimize
