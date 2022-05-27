@@ -22,7 +22,7 @@ const settings = {
     components: ['source/sass/base/*.scss', 'source/sass/components/*.scss']
   },
   js: {
-    source: 'source/js/**/*.js',
+    source: ['source/js/components/**/*.js', 'source/js/main.js'],
     target: dist.target + 'js/',
     filename: 'script.js',
     watch: 'source/js/**/*.js'
