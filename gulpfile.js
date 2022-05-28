@@ -88,6 +88,18 @@ function cleanCheck() {
  * Tasks
  */
 
+// Test - test task
+// -- import config
+const config = require('./gulp/config');
+
+// -- test function
+function getTask(task) {
+  return require(`./gulp/testFolder/${task}`);
+}
+
+// -- task alias
+exports.test = getTask('testTask');
+
 // Css - compile from sass
 function taskCss() {
   return src(settings.css.source)
