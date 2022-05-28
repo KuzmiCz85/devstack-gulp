@@ -14,6 +14,10 @@ const dist = {
 
 // Settings
 const settings = {
+  browserSync: {
+    url: 'http://devstack-gulp.test',
+    browser: 'firefox'
+  },
   css: {
     source: 'source/sass/style.scss',
     target: dist.target + 'css/',
@@ -30,7 +34,7 @@ const settings = {
   html: {
     source: 'source/pages/*.{html,htm,php}',
     target: dist.target + '',
-    watch: 'source/pages/*.{html,htm,php}',
+    watch: ['source/pages/*.{html,htm,php}', 'source/pages/templates/**/*.njk'],
     components: 'source/pages/templates/'
   },
   img: {
@@ -51,6 +55,8 @@ const gulp = require('gulp');
   const concat = require('gulp-concat');
   // Delete files
   const del = require('del');
+// Browser control & reload
+const browserSync = require('browser-sync');
 // Create css from sass files
 const sass = require('gulp-sass')(require('sass'));
 // Lint css files
@@ -149,11 +155,17 @@ async function taskClean() {
   console.log('\n');
 };
 
-// Watch - track frequently changed files
+// Watch - track for changes, recall tasks & reload browser
 function taskWatch() {
-  watch(settings.css.watch, taskCss);
-  watch(settings.js.watch, taskJs);
-  watch(settings.html.watch, taskHtml);
+  // initialize browserSync
+  browserSync.init({
+    proxy: settings.browserSync.url,
+    browser: settings.browserSync.browser
+  });
+
+  watch(settings.css.watch, taskCss).on('change', browserSync.reload);
+  watch(settings.js.watch, taskJs).on('change', browserSync.reload);
+  watch(settings.html.watch, taskHtml).on('change', browserSync.reload);
 };
 
 /**
