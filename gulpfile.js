@@ -1,47 +1,7 @@
 'use strict';
 
-/**
- * Configuration
- */
-
-// Target folder
-const dist = {
-  target: 'test/',
-  /* Auto clean target folder before upload
-    set autoClean value to true */
-  autoClean: true,
-};
-
-// Settings
-const settings = {
-  browserSync: {
-    url: 'http://devstack-gulp.test',
-    browser: 'firefox'
-  },
-  css: {
-    source: 'source/sass/style.scss',
-    target: dist.target + 'css/',
-    filename: 'style.css',
-    watch: 'source/sass/**/*.scss',
-    components: ['source/sass/base/*.scss', 'source/sass/components/*.scss']
-  },
-  js: {
-    source: ['source/js/components/**/*.js', 'source/js/main.js'],
-    target: dist.target + 'js/',
-    filename: 'script.js',
-    watch: 'source/js/**/*.js'
-  },
-  html: {
-    source: 'source/pages/*.{html,htm,php}',
-    target: dist.target + '',
-    watch: ['source/pages/*.{html,htm,php}', 'source/pages/templates/**/*.njk'],
-    components: 'source/pages/templates/'
-  },
-  img: {
-    source: 'source/images/**/*.{gif,jpg,jpeg,png}',
-    target: dist.target + 'images/'
-  }
-};
+// Configuration
+const settings = require('./gulp/config');
 
 /**
  * Gulp API & plugins
@@ -75,7 +35,7 @@ const taskEnd = Promise.resolve('end');
 
 // Check if automatic cleaning is allowed
 function cleanCheck() {
-  if (dist.autoClean == true) {
+  if (settings.clean.autoClean == true) {
     console.log('Cleaning enabled\n');
     return taskClean();
   } else {
@@ -90,7 +50,7 @@ function cleanCheck() {
 
 // Test - test task
 // -- import config
-const config = require('./gulp/config');
+// const config = require('./gulp/config');
 
 // -- test function
 function getTask(task) {
@@ -158,8 +118,8 @@ function taskImg() {
 
 // Clean - delete files in dist folder
 async function taskClean() {
-  const deletedFilePaths = await del([dist.target + '**/*.*']);
-  const deletedDirectoryPaths = await del([dist.target + '**/']);
+  const deletedFilePaths = await del(settings.clean.target.files);
+  const deletedDirectoryPaths = await del(settings.clean.target.folders);
 
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
