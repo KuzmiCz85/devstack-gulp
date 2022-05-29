@@ -7,5 +7,8 @@
 node_modules
 package-lock.json
 
+# Ignore empty-task.js
+empty-task.js
+
 # Ignore test folder and files
 test*

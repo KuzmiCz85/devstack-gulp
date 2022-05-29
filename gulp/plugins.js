@@ -1,21 +1,23 @@
 // Plugins used in gulp tasks
 module.exports = {
-  // -- merge files
+  // merge files
   concat: require('gulp-concat'),
-  // -- delete files
+  // delete files
   del: require('del'),
-  // -- browser control & reload
+  // rename files
+  rename: require('gulp-rename'),
+  // browser control & reload
   browserSync: require('browser-sync'),
-  // -- process css from sass files
+  // process css from sass files
   sass: require('gulp-sass')(require('sass')),
-  // -- lint css files
+  // lint css files
   stylelint: require('gulp-stylelint'),
-  // -- minify js files
+  // minify js files
   uglify: require('gulp-uglify'),
-  // -- lint js files
+  // lint js files
   jshint: require('gulp-jshint'),
-  // -- render html from nunjucks templates
+  // render html from nunjucks templates
   nunjucksRender: require('gulp-nunjucks-render'),
-  // -- optimize images
+  // optimize images
   imagemin: require('gulp-imagemin')
 }

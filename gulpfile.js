@@ -1,16 +1,31 @@
 'use strict';
 
+// Gulp
+const gulp = require('gulp');
+  // require plugins from gulp/plugins.js
+  const plugins = require('./gulp/plugins');
+
 // Configuration
 const settings = require('./gulp/config');
+  // stored in gulp/config.js, required independently by every task
+  // const config = require('./gulp/config');
+
+// Call task from gulp/tasks
+function callTask(task) {
+  return require(`./gulp/tasks/${task}`)(gulp, plugins);
+}
+
+// Tasks
+exports.newTask = callTask('new-task');
 
 /**
  * Gulp API & plugins
  */
 
 // Gulp
-const gulp = require('gulp');
+
   // Plugins
-  const plugins = require('./gulp/plugins');
+
   // API
   const {src, dest, series, parallel, watch} = require('gulp'); // for old tasks
   // Merge files
@@ -49,18 +64,6 @@ function cleanCheck() {
 /**
  * Tasks
  */
-
-// Test - test task
-// -- import config
-// const config = require('./gulp/config');
-
-// -- test function
-function getTask(task) {
-  return require(`./gulp/testFolder/${task}`)(gulp, plugins);
-}
-
-// -- task alias
-exports.test = getTask('testTask');
 
 // Css - compile from sass
 function taskCss() {

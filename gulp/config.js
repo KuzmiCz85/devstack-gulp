@@ -3,14 +3,19 @@ const dist = 'test';
 
 // Task settings
 module.exports = {
-
-  // -- browsersync
+  // new-task
+  newTask: {
+    source: './gulp/utility/new-task.template.js',
+    filename: 'empty-task.js',
+    target: './gulp/tasks/'
+  },
+  // browsersync
   browserSync: {
     url: 'http://devstack-gulp.test',
     browser: 'firefox'
   },
 
-  // -- clean
+  // clean
   clean: {
     target: {
       files: `${dist}/**/*.*`,
@@ -20,7 +25,7 @@ module.exports = {
     autoClean: true // true = on | false = off
   },
 
-  // -- css
+  // css
   css: {
     source: './source/sass/style.scss',
     target: `${dist}/css/`,
