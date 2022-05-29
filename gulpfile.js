@@ -9,8 +9,10 @@ const settings = require('./gulp/config');
 
 // Gulp
 const gulp = require('gulp');
+  // Plugins
+  const plugins = require('./gulp/plugins');
   // API
-  const {src, dest, series, parallel, watch} = require('gulp');
+  const {src, dest, series, parallel, watch} = require('gulp'); // for old tasks
   // Merge files
   const concat = require('gulp-concat');
   // Delete files
@@ -54,7 +56,7 @@ function cleanCheck() {
 
 // -- test function
 function getTask(task) {
-  return require(`./gulp/testFolder/${task}`);
+  return require(`./gulp/testFolder/${task}`)(gulp, plugins);
 }
 
 // -- task alias
