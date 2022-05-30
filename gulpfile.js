@@ -1,14 +1,16 @@
 'use strict';
+// Name: Gulp devstack
+// Description: website devstack using Gulp automation toolkit
+// Dependecies: npm i --save-dev gulp
 
 // Gulp
-const gulp = require('gulp');
+const gulp = require('gulp'),
   // require plugins from gulp/plugins.js
-  const plugins = require('./gulp/plugins');
-
-// Configuration
-const settings = require('./gulp/config');
+  plugins = require('./gulp/plugins'),
+  // Configuration
+  settings = require('./gulp/config');
   // stored in gulp/config.js, required independently by every task
-  // const config = require('./gulp/config');
+  // config = require('./gulp/config');
 
 // Call task from gulp/tasks
 function callTask(task) {
@@ -17,6 +19,8 @@ function callTask(task) {
 
 // Tasks
 exports.newTask = callTask('new-task');
+exports.html = callTask('html');
+exports.images = callTask('images');
 
 /**
  * Gulp API & plugins
@@ -103,6 +107,8 @@ function taskJsLint() {
 };
 
 // Html - copy and render pages
+// Removed to external js file gulp/tasks/html.js
+/*
 function taskHtml() {
   return src(settings.html.source)
     .pipe(nunjucksRender({
@@ -113,13 +119,21 @@ function taskHtml() {
     }))
     .pipe(dest(settings.html.target));
 };
+*/
 
 // Images - copy and optimize
+// Removed to external js file gulp/tasks/images.js
+/*
 function taskImg() {
   return src(settings.img.source)
-  .pipe(imagemin())
-  .pipe(dest(settings.img.target));
+    .pipe(imagemin([
+      imagemin.gifsicle({interlaced: true}),
+      imagemin.mozjpeg({quality: 75, progressive: true}),
+      imagemin.optipng({optimizationLevel: 5})
+    ]))
+    .pipe(dest(settings.img.target));
 };
+*/
 
 // Clean - delete files in dist folder
 async function taskClean() {
@@ -161,13 +175,13 @@ function taskWatch() {
     // Lint js files
     exports.jsLint = taskJsLint;
   // Html
-  exports.html = taskHtml;
+  //exports.html = taskHtml;
   // Images
-  exports.img = taskImg;
+  //exports.img = taskImg;
 // General
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = series(cleanCheck, parallel(series(taskCssLint, taskCss), series(taskJsLint, taskJs), taskHtml, taskImg));
+  exports.deploy = series(cleanCheck, parallel(series(taskCssLint, taskCss), series(taskJsLint, taskJs)/*, taskHtml, taskImg*/));
   // Default
   exports.default = taskWatch;
