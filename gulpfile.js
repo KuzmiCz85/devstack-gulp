@@ -1,7 +1,8 @@
-'use strict';
 // Name: Gulp devstack
 // Description: website devstack using Gulp automation toolkit
 // Dependecies: npm i --save-dev gulp
+
+'use strict';
 
 // Gulp
 const gulp = require('gulp'),
@@ -19,8 +20,11 @@ function callTask(task) {
 
 // Tasks
 exports.newTask = callTask('new-task');
+exports.css = callTask('styles');
+exports.js = callTask('scripts');
 exports.html = callTask('html');
 exports.images = callTask('images');
+exports.watch = callTask('watch');
 
 /**
  * Gulp API & plugins
@@ -70,12 +74,14 @@ function cleanCheck() {
  */
 
 // Css - compile from sass
+/*
 function taskCss() {
   return src(settings.css.source)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(concat(settings.css.filename))
     .pipe(dest(settings.css.target));
 };
+*/
 
 // Css - lint files
 function taskCssLint () {
@@ -91,12 +97,14 @@ function taskCssLint () {
 };
 
 // JavaScript - merge and minify files
+/*
 function taskJs() {
   return src(settings.js.source)
     .pipe(concat(settings.js.filename))
     .pipe(uglify())
     .pipe(dest(settings.js.target));
 };
+*/
 
 // Javascript - lint files
 function taskJsLint() {
@@ -147,6 +155,7 @@ async function taskClean() {
 };
 
 // Watch - track for changes, recall tasks & reload browser
+/*
 function taskWatch() {
   // initialize browserSync
   browserSync.init({
@@ -158,6 +167,7 @@ function taskWatch() {
   watch(settings.js.watch, taskJs).on('change', browserSync.reload);
   watch(settings.html.watch, taskHtml).on('change', browserSync.reload);
 };
+*/
 
 /**
  * Task runners
@@ -166,12 +176,12 @@ function taskWatch() {
 // Source files processing
   // Css
     // Process css files
-    exports.css = taskCss;
+    //exports.css = taskCss;
     // Lint css
     exports.cssLint = taskCssLint;
   // Js
     // Process js files
-    exports.js = taskJs;
+    //exports.js = taskJs;
     // Lint js files
     exports.jsLint = taskJsLint;
   // Html
@@ -182,6 +192,6 @@ function taskWatch() {
   // Clean distribution folder
   exports.clean = taskClean;
   // Distribute
-  exports.deploy = series(cleanCheck, parallel(series(taskCssLint, taskCss), series(taskJsLint, taskJs)/*, taskHtml, taskImg*/));
+  exports.deploy = series(cleanCheck, parallel(series(taskCssLint/*, taskCss*/), series(taskJsLint/*, taskJs*/)/*, taskHtml, taskImg*/));
   // Default
-  exports.default = taskWatch;
+  //exports.default = taskWatch;

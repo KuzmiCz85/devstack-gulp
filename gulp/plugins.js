@@ -7,7 +7,7 @@ module.exports = {
   // rename files
   rename: require('gulp-rename'),
   // browser control & reload
-  browserSync: require('browser-sync'),
+  browserSync: require('browser-sync').create(),
   // process css from sass files
   sass: require('gulp-sass')(require('sass')),
   // lint css files
@@ -20,4 +20,4 @@ module.exports = {
   nunjucksRender: require('gulp-nunjucks-render'),
   // optimize images
   imagemin: require('gulp-imagemin')
-}
+};

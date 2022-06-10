@@ -1,14 +1,20 @@
+// Name: Gulp devstack configuration module
+// Description: external config file for gulpfile.js
+//  or external task files
+
 // Distribution folder
 const dist = 'test';
 
 // Task settings
 module.exports = {
+
   // new-task
   newTask: {
     source: './gulp/utility/new-task.template.js',
     filename: 'empty-task.js',
     target: './gulp/tasks/'
   },
+
   // browsersync
   browserSync: {
     url: 'http://devstack-gulp.test',
@@ -37,7 +43,7 @@ module.exports = {
     ]
   },
 
-  // -- js
+  // js
   js: {
     source: [
       './source/js/components/**/*.js',
@@ -48,7 +54,7 @@ module.exports = {
     watch: './source/js/**/*.js'
   },
 
-  // -- html
+  // html
   html: {
     source: './source/pages/*.{html,htm,php}',
     target: `${dist}/`,
@@ -59,9 +65,9 @@ module.exports = {
     components: './source/pages/templates/'
   },
 
-  // -- images
+  // images
   img: {
     source: './source/images/**/*.{gif,jpg,jpeg,png}',
     target: `${dist}/images/`
   }
-}
+};
