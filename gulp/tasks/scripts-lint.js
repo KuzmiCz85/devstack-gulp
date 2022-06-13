@@ -1,5 +1,5 @@
-// Gulp task:
-// Description:
+// Gulp task: jsLint
+// Description: js files lint
 // Dependecies: npm i --save-dev gulp-jshint
 
 const config = require('../config');
