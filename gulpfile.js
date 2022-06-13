@@ -20,8 +20,11 @@ function callTask(task) {
 
 // Tasks
 exports.newTask = callTask('new-task');
+exports.clean = callTask('clean');
 exports.css = callTask('styles');
+exports.cssLint = callTask('styles-lint');
 exports.js = callTask('scripts');
+exports.jsLint = callTask('scripts-lint');
 exports.html = callTask('html');
 exports.images = callTask('images');
 exports.watch = callTask('watch');
@@ -84,6 +87,7 @@ function taskCss() {
 */
 
 // Css - lint files
+/*
 function taskCssLint () {
   return src(settings.css.components)
   .pipe(stylelint({
@@ -95,6 +99,7 @@ function taskCssLint () {
     ]
   }));
 };
+*/
 
 // JavaScript - merge and minify files
 /*
@@ -107,12 +112,14 @@ function taskJs() {
 */
 
 // Javascript - lint files
+/*
 function taskJsLint() {
   return src(settings.js.source)
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 };
+*/
 
 // Html - copy and render pages
 // Removed to external js file gulp/tasks/html.js
@@ -144,6 +151,7 @@ function taskImg() {
 */
 
 // Clean - delete files in dist folder
+/*
 async function taskClean() {
   const deletedFilePaths = await del(settings.clean.target.files);
   const deletedDirectoryPaths = await del(settings.clean.target.folders);
@@ -153,6 +161,7 @@ async function taskClean() {
   console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'));
   console.log('\n');
 };
+*/
 
 // Watch - track for changes, recall tasks & reload browser
 /*
@@ -178,20 +187,20 @@ function taskWatch() {
     // Process css files
     //exports.css = taskCss;
     // Lint css
-    exports.cssLint = taskCssLint;
+    //exports.cssLint = taskCssLint;
   // Js
     // Process js files
     //exports.js = taskJs;
     // Lint js files
-    exports.jsLint = taskJsLint;
+    //exports.jsLint = taskJsLint;
   // Html
   //exports.html = taskHtml;
   // Images
   //exports.img = taskImg;
 // General
   // Clean distribution folder
-  exports.clean = taskClean;
+  //exports.clean = taskClean;
   // Distribute
-  exports.deploy = series(cleanCheck, parallel(series(taskCssLint/*, taskCss*/), series(taskJsLint/*, taskJs*/)/*, taskHtml, taskImg*/));
+  //exports.deploy = series(cleanCheck, parallel(series(taskCssLint, taskCss), series(taskJsLint, taskJs), taskHtml, taskImg));
   // Default
   //exports.default = taskWatch;
