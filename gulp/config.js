@@ -26,9 +26,7 @@ module.exports = {
     target: {
       files: `${dist}/**/*.*`,
       folders: `${dist}/**/`
-      },
-    // auto clean dist folder
-    autoClean: true // true = on | false = off
+      }
   },
 
   // css

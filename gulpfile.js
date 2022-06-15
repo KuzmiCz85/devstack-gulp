@@ -8,6 +8,8 @@
 const gulp = require('gulp'),
   // Plugins
   plugins = require('./gulp/plugins'),
+  // Gulp api
+  { task, series, parallel } = require('gulp'),
   // Configuration
     // not necessary here, required independently by every single task
   config = require('./gulp/config');
@@ -17,21 +19,16 @@ function callTask(taskName) {
   return require(`./gulp/tasks/${taskName}`)(gulp, plugins);
 }
 
-// Private tasks
-const task = {
-  clean: callTask('clean'),
-  css: callTask('styles'),
-  cssLint: callTask('styles-lint'),
-  js: callTask('scripts'),
-  jsLint: callTask('scripts-lint'),
-  html: callTask('html'),
-  images: callTask('images'),
-  watch: callTask('watch')
-}
-
-// Public tasks
-  // create empty file for new task
-exports.newTask = callTask('new-task');
+// Basic tasks
+task('clean', callTask('clean'));
+task('css', callTask('styles'));
+task('cssLint', callTask('styles-lint'));
+task('js', callTask('scripts'));
+task('jsLint', callTask('scripts-lint'));
+task('html', callTask('html'));
+task('img', callTask('images'));
+task('newTask', callTask('new-task'));
+task('watch', callTask('watch'));
 
 // Default task
-exports.default = task.watch;
+task('default', task('watch'));

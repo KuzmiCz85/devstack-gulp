@@ -1,6 +1,6 @@
 // Gulp task: css
 // Description: process sass files into target css file
-// Dependecies: npm i --save-dev gulp-rename
+// Dependecies: npm i --save-dev sass gulp-sass gulp-rename
 
 const config = require('../config');
 
