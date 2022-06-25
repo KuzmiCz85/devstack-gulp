@@ -1,7 +1,7 @@
 // Gulp task: html
 // Description: render html pages from njk templates
 //  and copy them to target folder
-// Dependecies: npm i --save-dev gulp-nunjucks-render
+// Dependecies: npm i --save-dev gulp-nunjucks-render gulp-rename
 
 const config = require('../config');
 

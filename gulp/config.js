@@ -31,22 +31,25 @@ module.exports = {
 
   // css
   css: {
-    source: './source/sass/style.scss',
+    source: [
+      './source/sass/main.scss',
+      './source/components/utilities/**/*.scss',
+      './source/components/atoms/**/*.scss',
+      './source/components/molecules/**/*.scss',
+      './source/components/organisms/**/*.scss'
+    ],
     target: `${dist}/css/`,
     filename: 'style.css',
-    watch: './source/sass/**/*.scss',
-    components: [
-      './source/sass/base/*.scss',
-      './source/sass/components/*.scss'
-    ]
+    watch: [
+      './source/sass/**/*.scss',
+      './source/components/**/*.scss'
+    ],
+    components: './source/components/**/*.scss'
   },
 
   // js
   js: {
-    source: [
-      './source/js/components/**/*.js',
-      './source/js/main.js'
-    ],
+    source: './source/js/script.js',
     target: `${dist}/js/`,
     filename: 'script.js',
     watch: './source/js/**/*.js'
@@ -54,13 +57,10 @@ module.exports = {
 
   // html
   html: {
-    source: './source/pages/*.{html,htm,php}',
+    source: './source/components/pages/*.{html,htm,php}',
     target: `${dist}/`,
-    watch: [
-      './source/pages/*.{html,htm,php}',
-      './source/pages/templates/**/*.njk'
-    ],
-    components: './source/pages/templates/'
+    watch: './source/components/**/*.{html,htm,php,njk}',
+    components: './source/components/'
   },
 
   // images
