@@ -9,8 +9,8 @@ module.exports = function(gulp, plugins) {
     const stream =
     // Stream definition
       gulp.src(config.css.source)
-        .pipe(plugins.sass({outputStyle: 'expanded'}).on('error', plugins.sass.logError))
-        .pipe(plugins.concat(config.css.filename))
+        .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
+        .pipe(plugins.concat(config.css.filename, {newLine: ''}))
         .pipe(gulp.dest(config.css.target));
 
     return stream;
