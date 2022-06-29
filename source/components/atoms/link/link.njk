@@ -1,0 +1,5 @@
+{% set class = 'link' %}
+
+{% macro link(content, linkPath) -%}
+<a class="{{ class }}" href="{{ linkPath }}">{{ content }}</a>
+{%- endmacro %}

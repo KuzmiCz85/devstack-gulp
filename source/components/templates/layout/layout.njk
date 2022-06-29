@@ -1,0 +1,18 @@
+{% set class = 'layout' %}
+
+{#- import used organisms -#}
+{% from "organisms/main/main.njk" import main as main %}
+
+{#- layout template -#}
+<!DOCTYPE html>
+<html lang="en">
+{% include "utilities/head/head.njk" %}
+<body>
+  <div class="{{ class }}">
+    {% block pageContent %}
+    {% endblock %}
+    {{ main() }}
+  </div>
+  {% include "utilities/script/script.njk" %}
+</body>
+</html>

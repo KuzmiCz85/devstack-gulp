@@ -1,0 +1,12 @@
+{% set class = 'main' %}
+
+{#- import used atoms & moleculess -#}
+{% from "atoms/link/link.njk" import link as link %}
+{% from "molecules/article/article.njk" import article as article %}
+
+{% macro main() -%}
+<main class="{{ class }}">
+  {{ article() }}
+  {{ link('Another link component with different content', '#') }}
+</main>
+{%- endmacro %}
