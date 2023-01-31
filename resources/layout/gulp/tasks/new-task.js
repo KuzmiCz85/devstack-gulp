@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 // Gulp task: newTask
 // Description: creates new empty-task.js file from template
 // Dependecies: npm i --save-dev gulp-rename

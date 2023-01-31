@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 // Gulp task: htmlTask
 // Description: render html from twig templates with json data
 // Dependecies: npm i --save-dev gulp-twig gulp-plumber gulp-html-beautify

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 // Gulp task: stylesTask
 // Description: process scss files
 // Dependecies: npm i --save-dev sass gulp-sass gulp-sass-glob
