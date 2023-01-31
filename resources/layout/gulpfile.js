@@ -1,8 +1,11 @@
 'use strict';
 
+const { parallel } = require('gulp');
+
 // Tasks list
 const { newTask } = require('./gulp/tasks/new-task');
 const { stylesTask } = require('./gulp/tasks/styles');
+const { htmlTask } = require('./gulp/tasks/html');
 
 // Watch
 
@@ -10,4 +13,4 @@ const { stylesTask } = require('./gulp/tasks/styles');
 exports.newTask = newTask;
 
 // Default task
-exports.default = stylesTask;
+exports.default = parallel(htmlTask, stylesTask);
