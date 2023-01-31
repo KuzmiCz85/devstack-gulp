@@ -5,6 +5,13 @@
 const srcPath = './src/';
 const buildPath = '../../test/';
 
+exports.browserSync = {
+  server: {
+    baseDir: `${buildPath}`,
+  },
+  watch: true,
+}
+
 exports.html = {
   src: `${buildPath}*.html`,
   dest: `${buildPath}`,
@@ -19,6 +26,7 @@ exports.html = {
 exports.json = {
   src: `${srcPath}components/**/*.json`,
   dest: `${srcPath}data.json`,
+  watch: `${srcPath}components/**/*.json`
 };
 
 exports.newTask = {
@@ -33,6 +41,7 @@ exports.scss = {
   settings: {
     outputStyle: 'expanded',
   },
+  watch: `${srcPath}**/*.scss`
 };
 
 exports.twig = {
@@ -44,4 +53,5 @@ exports.twig = {
     },
   },
   data: `${srcPath}data.json`,
+  watch: `${srcPath}**/*.twig`
 };
