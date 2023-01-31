@@ -6,6 +6,8 @@
 
 'use strict';
 
+//const config = require('../config');
+
 const { src, dest } = require('gulp');
 
 const stream = () => {

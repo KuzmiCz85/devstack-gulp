@@ -20,6 +20,8 @@
     "gulp-sass": "^5.1.0",
     "gulp-sass-glob": "^1.1.0",
     "gulp-twig": "^1.2.0",
-    "sass": "^1.57.1"
+    "json-merger": "^1.1.9",
+    "sass": "^1.57.1",
+    "tiny-glob": "^0.2.9"
   }
 }

@@ -16,6 +16,11 @@ exports.html = {
   },
 };
 
+exports.json = {
+  src: `${srcPath}components/**/*.json`,
+  dest: `${srcPath}data.json`,
+};
+
 exports.newTask = {
   src: './gulp/utility/task-template.js',
   dest: './gulp/tasks/',

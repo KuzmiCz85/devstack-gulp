@@ -1,3 +1,4 @@
 {
-  "test": "test string from data"
+  "test": "json string from test 1",
+  "test2": "json string from test 2"
 }
