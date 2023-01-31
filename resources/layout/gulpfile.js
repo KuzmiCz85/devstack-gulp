@@ -2,6 +2,7 @@
 
 // Tasks list
 const { newTask } = require('./gulp/tasks/new-task');
+const { stylesTask } = require('./gulp/tasks/styles');
 
 // Watch
 
@@ -9,3 +10,4 @@ const { newTask } = require('./gulp/tasks/new-task');
 exports.newTask = newTask;
 
 // Default task
+exports.default = stylesTask;

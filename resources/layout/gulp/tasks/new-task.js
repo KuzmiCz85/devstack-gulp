@@ -1,6 +1,5 @@
 // Gulp task: newTask
-// Description: creates new empty-task.js file from template,
-//  which remains untracked by Git until it gets new proper name
+// Description: creates new empty-task.js file from template
 // Dependecies: npm i --save-dev gulp-rename
 
 'use strict';
