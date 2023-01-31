@@ -10,10 +10,11 @@ const { src, dest } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 
-exports.stylesTask = () => {
-
+const styles = () => {
   return src(config.scss.src)
     .pipe(sassGlob())
     .pipe(sass(config.scss.settings).on('error', sass.logError))
     .pipe(dest(config.scss.dest))
 };
+
+exports.stylesTask = styles;

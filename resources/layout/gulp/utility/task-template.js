@@ -8,8 +8,9 @@ const config = require('../config');
 
 const { src, dest } = require('gulp');
 
-exports.emptyTask = () => {
-
+const stream = () => {
   return src()
     .pipe(dest())
 };
+
+exports.emptyTask = stream;

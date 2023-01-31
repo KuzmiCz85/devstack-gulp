@@ -9,9 +9,10 @@ const config = require('../config');
 const { src, dest } = require('gulp');
 const rename = require('gulp-rename');
 
-exports.newTask = () => {
-
+const emptyTask = () => {
   return src(config.newTask.src)
     .pipe(rename(config.newTask.name))
     .pipe(dest(config.newTask.dest))
 };
+
+exports.newTask = emptyTask;
