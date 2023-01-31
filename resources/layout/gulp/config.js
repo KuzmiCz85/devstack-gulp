@@ -38,4 +38,5 @@ exports.twig = {
       Components: `${srcPath}components/`,
     },
   },
+  data: `${srcPath}data.json`,
 };
