@@ -3,7 +3,7 @@
 'use strict';
 
 const srcPath = './src/';
-const buildPath = '../../';
+const buildPath = '../../test/';
 
 exports.html = {
   src: `${buildPath}*.html`,
