@@ -22,7 +22,9 @@ const initJsonData = async () => {
 
   jsonData = jsonMerger.mergeFiles(jsonData)
 
-  fsExtra.writeFileSync(config.json.dest, JSON.stringify(jsonData, null, 2))
+  if (jsonData != null) {
+    fsExtra.writeFileSync(config.json.dest, JSON.stringify(jsonData, null, 2))
+  }
 };
 
 const getJsonData = () => {
