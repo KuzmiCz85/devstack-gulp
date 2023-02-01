@@ -41,7 +41,8 @@ exports.scss = {
   settings: {
     outputStyle: 'expanded',
   },
-  watch: `${srcPath}**/*.scss`
+  lint: `${srcPath}**/*.scss`,
+  watch: `${srcPath}**/*.scss`,
 };
 
 exports.twig = {
