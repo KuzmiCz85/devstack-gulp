@@ -9,20 +9,23 @@ const { series, parallel, watch } = require('gulp');
 // Tasks list
 
 const { htmlTask } = require('./gulp/tasks/html');
+const { imagesTask } = require('./gulp/tasks/images');
 const { newTask } = require('./gulp/tasks/new-task');
 const { stylesTask } = require('./gulp/tasks/styles');
 const { stylelintTask } = require('./gulp/tasks/stylelint');
 const { browserSyncInit } = require('./gulp/tasks/browsersync');
 
+const build = series(parallel(imagesTask), series(parallel(htmlTask, stylesTask), stylelintTask));
+
 // Watch
 const watchFiles = () => {
   watch(config.scss.watch, series(stylesTask, stylelintTask));
-  watch(config.twig.watch, series(parallel(htmlTask, stylesTask), stylelintTask));
-  watch(config.json.watch, series(parallel(htmlTask, stylesTask), stylelintTask));
+  watch(config.twig.watch, build);
+  watch(config.json.watch, build);
 };
 
-// Tasks
+// Tasks export
 exports.newTask = newTask;
 
 // Default task
-exports.default = series(parallel(htmlTask, stylesTask), stylelintTask, parallel(watchFiles, browserSyncInit));
+exports.default = series(build, parallel(watchFiles, browserSyncInit));

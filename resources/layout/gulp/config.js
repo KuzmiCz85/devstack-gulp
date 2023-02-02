@@ -23,10 +23,15 @@ exports.html = {
   },
 };
 
+exports.images = {
+  src: `${srcPath}images/**/*.{png,jpg,jpeg}`,
+  dest: `${buildPath}images/`,
+}
+
 exports.json = {
   src: `${srcPath}components/**/*.json`,
   dest: `${srcPath}data.json`,
-  watch: `${srcPath}components/**/*.json`
+  watch: `${srcPath}components/**/*.json`,
 };
 
 exports.newTask = {
@@ -51,8 +56,9 @@ exports.twig = {
   settings: {
     namespaces: {
       Components: `${srcPath}components/`,
+      Images: `${srcPath}images/`,
     },
   },
   data: `${srcPath}data.json`,
-  watch: `${srcPath}**/*.twig`
+  watch: `${srcPath}**/*.twig`,
 };
