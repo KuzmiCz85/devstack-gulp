@@ -40,7 +40,7 @@ const twig = () => {
 };
 
 const htmlFormat = () => {
-  return src(config.html.src)
+  return src(`${config.html.dest}*.html`)
     .pipe(htmlBeautify(config.html.settings))
     .pipe(dest(config.html.dest))
 };
