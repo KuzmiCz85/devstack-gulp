@@ -31,6 +31,7 @@ exports.images = {
 exports.js = {
   src: `${srcPath}js/*.js`,
   dest: `${buildPath}`,
+  watch:  `${srcPath}**/*.{js,ts}`,
 }
 
 exports.json = {

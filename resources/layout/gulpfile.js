@@ -22,6 +22,7 @@ const build = series(parallel(copyTask, imagesTask), series(parallel(htmlTask, s
 const watchFiles = () => {
   watch(config.scss.watch, series(stylesTask, stylelintTask));
   watch(config.twig.watch, build);
+  watch(config.js.watch, build);
   watch(config.json.watch, build);
 };
 
