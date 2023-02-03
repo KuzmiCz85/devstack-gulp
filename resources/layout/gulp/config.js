@@ -28,6 +28,11 @@ exports.images = {
   dest: `${buildPath}images/`,
 }
 
+exports.js = {
+  src: `${srcPath}js/*.js`,
+  dest: `${buildPath}`,
+}
+
 exports.json = {
   src: `${srcPath}components/**/*.json`,
   dest: `${srcPath}data.json`,
