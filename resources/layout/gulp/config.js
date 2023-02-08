@@ -3,7 +3,7 @@
 'use strict';
 
 const srcPath = './src/';
-const buildPath = '../../test/';
+const buildPath = 'build/';
 
 exports.browserSync = {
   server: {

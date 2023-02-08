@@ -4,8 +4,9 @@
   "description": "Basic kit for front-end development",
   "author": "KuzmiCz",
   "scripts": {
+    "clean": "rimraf build",
     "gulp": "gulp",
-    "dev": "npm run lint && npm run gulp",
+    "dev": "npm run clean && npm run lint && npm run gulp",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "gulp-uglify": "^3.0.2",
     "json-merger": "^1.1.9",
     "postcss-scss": "^4.0.6",
+    "rimraf": "^4.1.2",
     "sass": "^1.57.1",
     "stylelint": "^14.16.1",
     "stylelint-config-standard": "^29.0.0",
