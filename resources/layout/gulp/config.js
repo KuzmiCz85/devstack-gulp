@@ -28,12 +28,6 @@ exports.images = {
   dest: `${buildPath}images/`,
 }
 
-exports.js = {
-  src: `${srcPath}js/*.js`,
-  dest: `${buildPath}`,
-  watch:  `${srcPath}**/*.{js,ts}`,
-}
-
 exports.json = {
   src: `${srcPath}components/**/*.json`,
   dest: `${srcPath}data.json`,
@@ -45,6 +39,13 @@ exports.newTask = {
   dest: './gulp/tasks/',
   name: 'empty-task.js',
 };
+
+exports.scripts = {
+  src: `${srcPath}**/*.{js,ts}`,
+  dest: `${buildPath}`,
+  fileName: 'index.js',
+  watch:  `${srcPath}**/*.{js,ts}`,
+}
 
 exports.scss = {
   src: `${srcPath}scss/style.scss`,

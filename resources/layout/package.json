@@ -4,8 +4,9 @@
   "description": "Basic kit for front-end development",
   "author": "KuzmiCz",
   "scripts": {
-    "dev": "npm run gulp:default",
-    "gulp:default": "gulp"
+    "gulp": "gulp",
+    "dev": "npm run lint && npm run gulp",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.50.0",
@@ -23,6 +24,8 @@
     "gulp-sass-glob": "^1.1.0",
     "gulp-stylelint": "^13.0.0",
     "gulp-twig": "^1.2.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
     "json-merger": "^1.1.9",
     "postcss-scss": "^4.0.6",
     "sass": "^1.57.1",
